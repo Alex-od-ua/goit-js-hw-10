@@ -57,6 +57,16 @@ function fetchCountry(searchCountry) {
   // .finally(refs.input.reset());
 }
 
+function errorManyMatches() {
+  Notiflix.Notify.info(
+    'Too many matches found. Please enter a more specific name.'
+  );
+}
+
+function errorNoName() {
+  Notiflix.Notify.failure('Oops, there is no country with that name');
+}
+
 function renderList(searchCountries) {
   const countryList = searchCountries
     .map(country => {
@@ -84,14 +94,4 @@ function renderInfo(searchCountries) {
     .join('');
 
   return countryInfo;
-}
-
-function errorManyMatches() {
-  Notiflix.Notify.info(
-    'Too many matches found. Please enter a more specific name.'
-  );
-}
-
-function errorNoName() {
-  Notiflix.Notify.failure('Oops, there is no country with that name');
 }
