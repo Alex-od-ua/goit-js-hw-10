@@ -17,7 +17,7 @@ refs.input.focus();
 
 function onSearch(event) {
   event.preventDefault();
-  searchQuery = event.target.value.toLowerCase().trim();
+  const searchQuery = event.target.value.toLowerCase().trim();
 
   if (searchQuery === '') {
     return (refs.countryInfo.innerHTML = ''), (refs.countryList.innerHTML = '');
