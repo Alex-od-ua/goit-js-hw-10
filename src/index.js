@@ -56,17 +56,17 @@ function fetchCountry(searchCountry) {
 }
 
 function renderList(searchCountries) {
-  return (countryList = searchCountries
+  return searchCountries
     .map(({ flags, name }) => {
       return `<li class="list-item">
    <img class="list-img" src="${flags.svg}" alt='${name}' width = 75px height = 50px>
    <h2 class="list-title">${name}</h2></li>`;
     })
-    .join(''));
+    .join('');
 }
 
 function renderInfo(searchCountries) {
-  return (countryInfo = searchCountries
+  return searchCountries
     .map(({ capital, population, languages }) => {
       languages
         .map(({ name }) => {
@@ -78,7 +78,7 @@ function renderInfo(searchCountries) {
     <li> <p class="list-text"><b>Population</b>: ${population}</p></li>
     <li><p class="list-text"><b>Languages</b>:&nbsp;${langName}</p></li></ul>`;
     })
-    .join(''));
+    .join('');
 }
 
 function errorTooManyMatches() {
