@@ -41,7 +41,7 @@ function fetchCountry(searchCountry) {
           renderInfo(searchCountry)
         );
       } else if (searchCountry.length >= 10) {
-        errorManyMatches();
+        errorTooManyMatches();
       } else {
         refs.countryList.insertAdjacentHTML(
           'beforeend',
@@ -50,48 +50,46 @@ function fetchCountry(searchCountry) {
       }
     })
     .catch(error => {
-      errorNoName();
+      errorNoCountryFound();
       console.log(error);
     })
     .finally();
+  // .finally((refs.input.value = ''));
   // .finally(refs.input.reset());
 }
 
-function errorManyMatches() {
+function renderList(searchCountries) {
+  return (countryList = searchCountries
+    .map(({ flags, name }) => {
+      return `<li class="list-item">
+   <img class="list-img" src="${flags.svg}" alt='${name}' width = 75px height = 50px>
+   <h2 class="list-title">${name}</h2></li>`;
+    })
+    .join(''));
+}
+
+function renderInfo(searchCountries) {
+  return (countryInfo = searchCountries
+    .map(({ capital, population, languages }) => {
+      languages
+        .map(({ name }) => {
+          console.log(name);
+          return (langName = name);
+        })
+        .join(', ');
+      return `<ul class="country-info"><li><p class="list-text" ><b>Capital</b>: ${capital}</p></li>
+    <li> <p class="list-text"><b>Population</b>: ${population}</p></li>
+    <li><p class="list-text"><b>Languages</b>:&nbsp;${langName}</p></li></ul>`;
+    })
+    .join(''));
+}
+
+function errorTooManyMatches() {
   Notiflix.Notify.info(
     'Too many matches found. Please enter a more specific name.'
   );
 }
 
-function errorNoName() {
+function errorNoCountryFound() {
   Notiflix.Notify.failure('Oops, there is no country with that name');
-}
-
-function renderList(searchCountries) {
-  const countryList = searchCountries
-    .map(country => {
-      return `<li class="list-item">
-   <img class="list-img" src="${country.flags.svg}" alt='${country.name}' width = 75px height = 50px>
-   <h2 class="list-title">${country.name}</h2></li>`;
-    })
-    .join('');
-
-  return countryList;
-}
-
-function renderInfo(searchCountries) {
-  const countryInfo = searchCountries
-    .map(country => {
-      const languages = country.languages
-        .map(language => {
-          return language.name;
-        })
-        .join(', ');
-      return `<ul class="country-info"><li><p class="list-text" ><b>Capital</b>: ${country.capital}</p></li>
-    <li> <p class="list-text"><b>Population</b>: ${country.population}</p></li>
-    <li><p class="list-text"><b>Languages</b>:&nbsp;${languages}</p></li></ul>`;
-    })
-    .join('');
-
-  return countryInfo;
 }
