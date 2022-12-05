@@ -68,15 +68,10 @@ function renderList(searchCountries) {
 function renderInfo(searchCountries) {
   return searchCountries
     .map(({ capital, population, languages }) => {
-      languages
-        .map(({ name }) => {
-          console.log(name);
-          return (langName = name);
-        })
-        .join(', ');
+      const name = languages.map(({ name }) => name).join(', ');
       return `<ul class="country-info"><li><p class="list-text" ><b>Capital</b>: ${capital}</p></li>
     <li> <p class="list-text"><b>Population</b>: ${population}</p></li>
-    <li><p class="list-text"><b>Languages</b>:&nbsp;${langName}</p></li></ul>`;
+    <li><p class="list-text"><b>Languages</b>:&nbsp;${name}</p></li></ul>`;
     })
     .join('');
 }
