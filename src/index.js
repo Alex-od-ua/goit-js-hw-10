@@ -52,10 +52,7 @@ function fetchCountry(searchCountry) {
     .catch(error => {
       errorNoCountryFound();
       console.log(error);
-    })
-    .finally();
-  // .finally((refs.input.value = ''));
-  // .finally(refs.input.reset());
+    });
 }
 
 function renderList(searchCountries) {
